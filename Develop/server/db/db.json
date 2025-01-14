@@ -1,1 +1,14 @@
-[]
+{
+    "NewYork": {
+      "city": "New York",
+      "units": "metric"
+    },
+    "London": {
+      "city": "London",
+      "units": "metric"
+    },
+    "Miami": {
+      "city": "Miami",
+      "units": "metric"
+    }
+  }

@@ -151,7 +151,7 @@ async getWeatherForCity(city: string) {
       const weather = await this.fetchWeatherData(coordinates);
       return weather;
     }
-    throw now Error('Weather data not found');
+    throw Error('Weather data not found');
   } catch (error: any) {
     console.error(error);
     throw error;
