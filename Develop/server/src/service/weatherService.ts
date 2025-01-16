@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 // TODO: Define an interface for the Coordinates object
@@ -13,16 +14,16 @@ class Weather {
   date: string;
   icon: string;
   tempF: number;
-  wind: number;
+  windSpeed: number;
   humidity: number;
   iconDescription: string;
 
-constructor (city: string, date: string, icon: string, tempF: number, wind: number, humidity: number, iconDescription: string) {
+constructor (city: string, date: string, icon: string, tempF: number, windSpeed: number, humidity: number, iconDescription: string) {
   this.city = city;
   this.date = date;
   this.icon = icon;
   this.tempF = tempF;
-  this.wind = wind;
+  this.windSpeed = windSpeed;
   this.humidity = humidity;
   this.iconDescription = iconDescription;
 }
@@ -47,6 +48,7 @@ private async fetchLocationData(query: string) {
     if (!this.baseURL || !this.apiKey) {
       throw new Error("Key or base URL not found")
     }
+    
     const response: Coordinates[] = await fetch(query).then((res) =>
       res.json()
     );
@@ -70,13 +72,13 @@ private destructureLocationData(locationData: Coordinates): Coordinates {
 }
   // TODO: Create buildGeocodeQuery method
 private buildGeocodeQuery(): string {
-  const geoQuery = `${this.baseURL}/geo.1.0/direct?q=${this.cityName}&appid=${this.apiKey}`
+  const geoQuery = `${this.baseURL}/geo/1.0/direct?q=${this.cityName}&appid=${this.apiKey}`
   return geoQuery;
 }
   // TODO: Create buildWeatherQuery method
 private buildWeatherQuery(coordinates: Coordinates): string {
-  const weatherQuery = `${this.baseURL}`;
-  return weatherQuery;
+  const weatherQuery = `${this.baseURL}/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&appid=${this.apiKey}`;
+    return weatherQuery;
 }
   // TODO: Create fetchAndDestructureLocationData method
 private async fetchAndDestructureLocationData() {
@@ -94,17 +96,20 @@ private async fetchWeatherData(coordinates: Coordinates) {
     if (!response) {
       throw new Error(`Failed to fetch weather data`);
     }
+
     const currentWeather: Weather = this.parseCurrentWeather(
       response.list[0]
     );
+
     const forecast: Weather[] = this.buildForecastArray(
       currentWeather,
       response.list
     );
+
     return forecast;
   } catch (error: any) {
     console.error(error);
-    throw error;
+    return error;
   }
 }
   // TODO: Build parseCurrentWeather method
@@ -141,6 +146,7 @@ private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
       )
     )
   }
+  return weatherForecast;
 }
   // TODO: Complete getWeatherForCity method
 async getWeatherForCity(city: string) {

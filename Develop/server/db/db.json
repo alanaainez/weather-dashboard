@@ -1,14 +1,6 @@
-{
-    "NewYork": {
-      "city": "New York",
-      "units": "metric"
-    },
-    "London": {
-      "city": "London",
-      "units": "metric"
-    },
-    "Miami": {
-      "city": "Miami",
-      "units": "metric"
-    }
-  }
+[
+	{
+		"name": "Dallas",
+		"id": "2a69d567-c19e-4c29-ae0a-e5082030c260"
+	}
+]

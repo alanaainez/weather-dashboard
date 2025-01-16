@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs/promises';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -9,7 +9,7 @@ class City {
 
 constructor(name: string, id: string) {
   this.name = name;
-  this.id = uuidv4();
+  this.id = id || uuidv4();
 }}
 
 
@@ -17,9 +17,10 @@ constructor(name: string, id: string) {
 class HistoryService {
   // TODO: Define a read method that reads from the searchHistory.json file
 private async read() {
-  return await fs.readFile('db/db.json', 
-    {flag : 'a+',
-      encoding: 'utf8',});
+  return await fs.readFile('db/db.json', {
+      flag: 'a+',
+      encoding: 'utf8',
+    });
 }
   // TODO: Define a write method that writes the updated cities array to the searchHistory.json file
 private async write(cities: City[]) {
@@ -58,7 +59,10 @@ async addCity(city: string) {
   async removeCity(id: string) {
     return await this.getCities()
     .then((cities) => cities.filter((city) => city.id !== id))
-    .then((filteredCities) => this.write(filteredCities));
+    .then((filteredCities) => {
+      this.write(filteredCities);
+      return filteredCities;
+    })
   }
 }
 
