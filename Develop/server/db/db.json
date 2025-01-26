@@ -1,6 +1,26 @@
 [
 	{
 		"name": "Dallas",
-		"id": "2a69d567-c19e-4c29-ae0a-e5082030c260"
+		"id": "315749f5-9e25-47bb-a1be-93f405d2d512"
+	},
+	{
+		"name": "Houston",
+		"id": "bf0f68c6-0d2a-4e8e-a55d-22fefae885e9"
+	},
+	{
+		"name": "Miami",
+		"id": "d7cfe6bb-3810-4ff0-9a36-b0dd1539baca"
+	},
+	{
+		"name": "Phoenix",
+		"id": "ce5db594-7870-4df2-92f9-0b906138c5a1"
+	},
+	{
+		"name": "Columbus",
+		"id": "0dec117a-1576-4953-a051-7650c2906d34"
+	},
+	{
+		"name": "Sacramento",
+		"id": "8cb19804-12ba-4b8e-8d66-04be318e4c5e"
 	}
 ]
